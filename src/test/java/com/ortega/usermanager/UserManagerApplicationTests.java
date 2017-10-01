@@ -1,4 +1,4 @@
-package com.ortega.marcela.usermanager;
+package com.ortega.usermanager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
