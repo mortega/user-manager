@@ -3,8 +3,16 @@ package com.ortega.usermanager.controller;
 import com.ortega.usermanager.UserService;
 import com.ortega.usermanager.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.ResponseErrorHandler;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -25,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user){
+    public User create(@RequestBody @Valid User user){
         return userService.insert(user);
     }
 
@@ -35,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable("id") Long id, @RequestBody User user){
+    public User update(@PathVariable("id") Long id, @RequestBody @Valid User user){
         return userService.update(id, user);
     }
 

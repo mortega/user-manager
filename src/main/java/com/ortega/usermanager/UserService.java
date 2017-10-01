@@ -3,7 +3,9 @@ package com.ortega.usermanager;
 import com.ortega.usermanager.domain.entity.User;
 import com.ortega.usermanager.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,24 +28,32 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User get(Long id){
-        return repository.findOne(id);
+    public User get(Long id) throws ResourceNotFoundException {
+        User currentUser = repository.findOne(id);
+        if(currentUser == null) throw new ResourceNotFoundException("User not found.");
+        return currentUser;
     }
 
     public User update(Long id, User user) {
         User currentUser = repository.findOne(id);
-        if(currentUser == null) return null;
-
+        if(currentUser == null) throw new ResourceNotFoundException("User not found.");
         user.setId(id);
         return repository.save(user);
     }
 
     public void remove(Long id) {
-        repository.delete(id);
+        try {
+            repository.delete(id);
+        }
+        catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException("User not found.");
+        }
     }
 
     public User search(String cpf) {
-        return repository.findByCpf(cpf);
+        User currentUser = repository.findByCpf(cpf);
+        if(currentUser == null) throw new ResourceNotFoundException("User not found.");
+        return currentUser;
     }
 
     @Transactional

@@ -1,6 +1,11 @@
 package com.ortega.usermanager.domain.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,12 +22,18 @@ public class User implements Serializable {
     private Long id;
 
     @Column(nullable = false)
+    @NotEmpty
+    @Size(min=2, max=50)
     private String name;
 
     @Column(nullable = false)
+    @NotEmpty
+    @Size(min=2, max=100)
     private String lastName;
 
     @Column(nullable = false, unique = true)
+    @NotEmpty
+    @Pattern(regexp ="\\d{11}")
     private String cpf;
 
     @Column
