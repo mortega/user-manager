@@ -40,4 +40,8 @@ public class UserService {
         repository.delete(id);
     }
 
+    public User search(String cpf) {
+        return repository.findByCpf(cpf);
+    }
+
 }

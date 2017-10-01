@@ -42,4 +42,9 @@ public class UserController {
         userService.remove(id);
     }
 
+    @GetMapping("/cpf/{cpf}")
+    public User searchByCpf(@PathVariable("cpf") String cpf){
+        return userService.search(cpf);
+    }
+
 }
