@@ -5,6 +5,8 @@ import com.ortega.usermanager.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by marcela on 9/30/17.
  */
@@ -47,4 +49,8 @@ public class UserController {
         return userService.search(cpf);
     }
 
+    @PostMapping("/batch")
+    public Iterable<User> createAll(@RequestBody List<User> users){
+        return userService.insertAll(users);
+    }
 }

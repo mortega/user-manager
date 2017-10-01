@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by marcela on 9/30/17.
  */
@@ -42,6 +44,11 @@ public class UserService {
 
     public User search(String cpf) {
         return repository.findByCpf(cpf);
+    }
+
+    @Transactional
+    public Iterable<User> insertAll(List<User> users) {
+        return repository.save(users);
     }
 
 }
