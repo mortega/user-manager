@@ -31,3 +31,9 @@ API for handling user data
    ]
  }
  ```
+
+# Tech
+ - Spring Boot: https://projects.spring.io/spring-boot/
+ - Spring Framework: https://spring.io/
+ - HSQLDB: http://hsqldb.org/
+ - Swagger UI: https://swagger.io/swagger-ui/
